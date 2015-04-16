@@ -1,0 +1,47 @@
+#Definition file for a Toyota car
+
+# CAN-id mappings
+__frames:
+  wheel-speed-a: [0x0b0, wheel_speed]
+  wheel-speed-b: [0x0b2, wheel_speed]
+  unknown-b4:    [0x0b4, unkb4]
+  brake:         [0x224, brake]
+  throttle:      [0x2c1, throttle]
+  engine:        [0x2c4, engine]
+  fuel:          [0x398, fuel_usage]
+
+# Structures definitions
+wheel_speed:
+  - a:     UBInt16
+  - b:     UBInt16
+  - flags: UBInt8
+  - seq:   UBInt8
+
+unkb4:
+  - __pad0:     Padding(4)
+  - distance_a: UBInt8
+  - speed:      UBInt16
+  - distance_b: UBInt8
+
+brake:
+  - flags:  UBInt8
+  - __pad0: Padding(7)
+
+throttle:
+  - flags0:   UBInt8
+  - unk0:     SBInt16
+  - unk1:     SBInt16
+  - unk2:     UBInt8
+  - throttle: SBInt16
+
+engine:
+  - rpm:    UBInt16
+  - __pad0: Padding(1)
+  - unk0:   UBInt8
+  - __pad1: Padding(2)
+  - unk1:   UBInt8
+  - unk2:   SBInt8
+
+fuel_usage:
+  - fuel_usage: SBInt16
+
